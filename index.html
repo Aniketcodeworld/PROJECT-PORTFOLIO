@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aniket Mishra - Personal Website</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        body.dark-mode {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        header img {
+            position: absolute;
+            top: 20px;
+            right: 22px;
+            width: 85px;
+            height: auto;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .dark-mode nav {
+            background-color: #111;
+        }
+        section {
+            padding: 20px;
+            margin: 20px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.5s ease, max-height 0.5s ease;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        section.active {
+            opacity: 1;
+            max-height: 1000px;
+            transition: opacity 1s ease, max-height 1s ease;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 14px;
+        }
+        footer.dark-mode {
+            background-color: #111;
+        }
+        #back-to-top {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            border-radius: 50%;
+        }
+        .dark-mode #back-to-top {
+            background-color: #333;
+        }
+        .dark-mode-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+            border-radius: 50%;
+        }
+        .dark-mode .dark-mode-toggle {
+            background-color: #333;
+        }
+        .skill-bar {
+            background-color: #eee;
+            border-radius: 25px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .skill-bar-inner {
+            height: 25px;
+            width: 0;
+            background-color: #4CAF50;
+            border-radius: 25px;
+            text-align: right;
+            line-height: 25px;
+            color: #fff;
+        }
+        .testimonial {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .testimonial p {
+            font-style: italic;
+            color: #555;
+        }
+        .blog-article {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .blog-article h3 {
+            color: #333;
+        }
+        .blog-article p {
+            color: #555;
+        }
+        .blog-article a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .blog-article a:hover {
+            text-decoration: underline;
+        }
+        .services {
+            text-align: center;
+            padding: 20px;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .services h2 {
+            margin-bottom: 10px;
+        }
+        .services ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .services li {
+            margin-bottom: 10px;
+        }
+        .contact-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .contact-links a {
+            display: inline-block;
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+        }
+        .contact-links a:hover {
+            color: #4CAF50;
+        }
+
+        /* Dark mode adjustments */
+        body.dark-mode {
+            color: #f0f0f0; /* Adjusting text color */
+        }
+        .dark-mode header,
+        .dark-mode nav,
+        .dark-mode section,
+        .dark-mode footer {
+            background-color: #111; /* Adjusting background color */
+            color: #f0f0f0; /* Adjusting text color */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Adjusting box shadow */
+        }
+        .dark-mode .testimonial {
+            background-color: #333; /* Adjusting testimonial background */
+            color: #f0f0f0; /* Adjusting testimonial text color */
+        }
+        .dark-mode .blog-article {
+            background-color: #444; /* Adjusting blog article background */
+            color: #f0f0f0; /* Adjusting blog article text color */
+        }
+        .dark-mode .services {
+            background-color: #222; /* Adjusting services background */
+            color: #f0f0f0; /* Adjusting services text color */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1><b>Aniket Mishra</b></h1>
+    <p id="welcome-message"><b>Greetings! Welcome to my portfolio</b></p>
+    <img src="images/WhatsApp Image 2024-02-16 at 19.14.56_a49e1aed.jpg" alt="Your Photo">
+</header>
+
+<nav>
+    <a href="#about" onclick="toggleSection('about')">About Me</a>
+    <a href="#skills" onclick="toggleSection('skills')">Skills</a>
+    <a href="#projects" onclick="toggleSection('projects')">Projects</a>
+    <a href="#education" onclick="toggleSection('education')">Education</a>
+    <a href="#testimonials" onclick="toggleSection('testimonials')">Testimonials</a>
+    <a href="#blog" onclick="toggleSection('blog')">Blog</a>
+    <a href="#contact" onclick="toggleSection('contact')">Contact</a>
+</nav>
+
+<section id="about" class="active">
+    <h2><u>About Me</u></h2>
+    <p>I am an enthusiastic, self-motivated, reliable, responsible and hard-working person. I am a mature team worker and adaptable to all challenging situations. I am able to work well both in a team environment as well as using my own initiative.</p>
+    <ul>
+        <li>Name: Aniket Mishra</li>
+        <li>Date of birth: 2003/08/06</li>
+        <li>Address: Nerukonda, Guntur, AP</li>
+        <li>Permanent address: Kathmandu, Nepal</li>
+    </ul>
+</section>
+
+<section id="skills">
+    <h2><u>Skills</u></h2>
+    <ul>
+        <li>Programming Skills:</li>
+        <ol>
+            <li>C
+                <div class="skill-bar">
+                    <div class="skill-bar-inner" style="width: 90%;">90%</div>
+                </div>
+            </li>
+            <li>C++/C
+                <div class="skill-bar">
+                    <div class="skill-bar-inner" style="width: 85%;">85%</div>
+                </div>
+            </li>
+            <li>Python
+                <div class="skill-bar">
+                    <div class="skill-bar-inner" style="width: 75%;">75%</div>
+                </div>
+            </li>
+            <li>JavaScript
+                <div class="skill-bar">
+                    <div class="skill-bar-inner" style="width: 70%;">70%</div>
+                </div>
+            </li>
+        </ol>
+        <li>Data Structure</li>
+        <li>Brilliant in communication and group work.</li>
+    </ul>
+</section>
+
+<section id="projects">
+    <h2><u>Projects</u></h2>
+    <ul>
+        <li>Seating arrangement of exam hall</li>
+        <li>Scientific calculator using Data Structure</li>
+        <li>Reader's Guide in C++</li>
+    </ul>
+</section>
+
+<section id="education">
+    <h2><u>Education</u></h2>
+    <ul>
+        <li>B.Tech in Computer Science, SRM University, AP</li>
+        <li>High School, Nightingale Int'l School, Kathmandu, Nepal</li>
+    </ul>
+</section>
+
+<section id="testimonials">
+    <h2><u>Testimonials</u></h2>
+    <div class="testimonial">
+        <p>"Aniket is a brilliant programmer and an excellent team player. His skills in C++ are top-notch!" - John Doe, Project Manager</p>
+    </div>
+    <div class="testimonial">
+        <p>"I have worked with Aniket on several projects, and his problem-solving abilities are exceptional." - Jane Smith, Software Engineer</p>
+    </div>
+</section>
+
+<section id="blog">
+    <h2><u>Blog</u></h2>
+    <article class="blog-article">
+        <h3>Latest Trends in AI</h3>
+        <p>Artificial Intelligence (AI) is evolving rapidly, with new trends emerging in various sectors...</p>
+        <a href="#">Read more</a>
+    </article>
+    <article class="blog-article">
+        <h3>Tips for Learning Python</h3>
+        <p>Python is a versatile programming language that's great for beginners and professionals alike...</p>
+        <a href="#">Read more</a>
+    </article>
+</section>
+
+<section id="services">
+    <h2><u>Services</u></h2>
+    <div class="services">
+        <h3>Web Development Services</h3>
+        <ul>
+            <li>Custom Website Development</li>
+            <li>Responsive Web Design</li>
+            <li>E-commerce Solutions</li>
+            <li>Content Management Systems (CMS)</li>
+            <li>Website Maintenance and Support</li>
+            <li>SEO Optimization</li>
+        </ul>
+    </div>
+</section>
+
+<section id="contact">
+    <h2><u>Contact</u></h2>
+    <p>Reach me at:</p>
+    <p>+91 7428830251</p>
+    <p>+977 9808128142</p>
+    <div class="contact-links">
+        <a href="mailto:aniket_mishra@srmap.edu.in">
+            <img src="images/email-icon.png" alt="Email">
+        </a>
+        <a href="https://www.facebook.com/aniket.mishra">
+            <img src="images/facebook-icon.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/aniket_mishra">
+            <img src="images/instagram-icon.png" alt="Instagram">
+        </a>
+        <a href="https://www.twitter.com/aniket_mishra">
+            <img src="images/twitter-icon.png" alt="Twitter">
+        </a>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Aniket Mishra. All rights reserved.</p>
+</footer>
+
+<button id="back-to-top" onclick="scrollToTop()">Back to Top</button>
+<button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+<script>
+    function toggleSection(sectionId) {
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            if (section.id === sectionId) {
+                section.classList.add('active');
+                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            } else {
+                section.classList.remove('active');
+            }
+        });
+    }
+
+    window.onscroll = function() {
+        const backToTop = document.getElementById('back-to-top');
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            backToTop.style.display = 'block';
+        } else {
+            backToTop.style.display = 'none';
+        }
+    };
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+    }
+
+    // Typewriter effect for the welcome message
+    const typewriter = (element, text, delay = 100) => {
+        let index = 0;
+        const interval = setInterval(() => {
+            element.textContent += text[index];
+            index++;
+            if (index === text.length) {
+                clearInterval(interval);
+            }
+        }, delay);
+    }
+
+    window.onload = () => {
+        const welcomeMessage = document.getElementById('welcome-message');
+        const welcomeText = "Greetings! Welcome to my portfolio";
+        welcomeMessage.textContent = "";
+        typewriter(welcomeMessage, welcomeText);
+    }
+</script>
+
+</body>
+</html>
